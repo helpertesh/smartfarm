@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartFarm · Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="dashboard">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="toolbar"><button class="btn secondary sm menu-btn" id="menuBtn">☰</button><h1>Smart farm dashboard</h1></div>
+          <div class="sub" id="greeting"></div>
+        </div>
+        <div class="toolbar" id="farmPicker"></div>
+      </div>
+
+      <div id="noFarm" class="hidden card">
+        <h2>Welcome! Let's set up your first farm</h2>
+        <p class="muted">Add your farm location, soil type and water source so we can tailor weather, crop advice and reminders to you.</p>
+        <a class="btn" href="farms.html?first=1">Add a farm</a>
+      </div>
+
+      <div id="content" class="hidden">
+        <div class="grid cols-3">
+          <div class="card span-2">
+            <div class="card-head"><h2>Weather</h2><span class="tiny" id="weatherPlace"></span></div>
+            <div id="weather"><div class="empty">Loading weather…</div></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Recommendations</h2></div>
+            <div id="weatherRecs"></div>
+          </div>
+        </div>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          <div class="card">
+            <div class="card-head"><h2>Crop advisory</h2><a class="small" href="advisory.html">Details</a></div>
+            <div id="advisory"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Farm activities</h2><a class="small" href="calendar.html">Calendar</a></div>
+            <div id="activities"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Alerts</h2></div>
+            <div id="alerts"></div>
+          </div>
+        </div>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          <div class="card">
+            <div class="card-head"><h2>Irrigation</h2></div>
+            <div id="irrigation"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Market prices</h2><a class="small" href="market.html">All markets</a></div>
+            <div id="market"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Farm performance</h2><a class="small" href="analytics.html">Analytics</a></div>
+            <div id="performance"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

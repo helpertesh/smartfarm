@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartFarm · My farms</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="farms">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="toolbar"><button class="btn secondary sm menu-btn" id="menuBtn">☰</button><h1>My farms</h1></div>
+          <div class="sub">Each farm has its own location, soil and water source, which drive all recommendations.</div>
+        </div>
+        <button class="btn" id="addBtn">+ Add farm</button>
+      </div>
+
+      <div id="welcome" class="notice ok hidden">Welcome to SmartFarm! Add your first farm below to get started.</div>
+      <div id="farmList" class="grid cols-3"></div>
+    </main>
+  </div>
+
+  <div id="modal" class="modal-bg hidden">
+    <div class="modal">
+      <h2 id="modalTitle">Add farm</h2>
+      <div id="formMsg" class="notice hidden"></div>
+      <form id="farmForm">
+        <input type="hidden" name="id" />
+        <div class="field"><label>Farm name</label><input name="name" required placeholder="e.g. Home farm" /></div>
+        <div class="field">
+          <label>Location (town or area)</label>
+          <div style="display:flex;gap:8px">
+            <input name="location_name" required placeholder="e.g. Nyeri" />
+            <button type="button" class="btn secondary" id="geoBtn">Find</button>
+          </div>
+          <div id="geoResults" class="small" style="margin-top:6px"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Latitude</label><input name="latitude" type="number" step="any" required /></div>
+          <div class="field"><label>Longitude</label><input name="longitude" type="number" step="any" required /></div>
+          <div class="field"><label>Size (acres)</label><input name="size_acres" type="number" step="0.1" min="0.1" value="1" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Soil type</label><select name="soil_type" id="soilSel"></select></div>
+          <div class="field"><label>Water source</label><select name="water_source" id="waterSel"></select></div>
+        </div>
+        <div class="toolbar" style="justify-content:flex-end">
+          <button type="button" class="btn secondary" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn">Save farm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/farms.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartFarm · Market prices</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="market">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="toolbar"><button class="btn secondary sm menu-btn" id="menuBtn">☰</button><h1>Market prices</h1></div>
+          <div class="sub">Latest prices per kilogram across markets. Compare before you sell.</div>
+        </div>
+        <div class="toolbar"><label style="margin:0">Market</label><select id="marketSel" style="width:auto"></select></div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card span-2">
+          <div class="card-head"><h2 id="marketTitle">Prices</h2></div>
+          <table id="priceTable"><thead><tr><th>Crop</th><th class="num">Price (KSh/kg)</th><th class="num">Updated</th><th></th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Compare markets</h2></div>
+          <div class="field"><select id="compareSel"></select></div>
+          <div id="compare"></div>
+          <h3 style="margin-top:16px">Price trend (90 days)</h3>
+          <div class="chart-box" style="height:180px"><canvas id="trend"></canvas></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/market.js"></script>
+</body>
+</html>

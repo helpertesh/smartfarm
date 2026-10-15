@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartFarm · Sign in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <section class="auth-hero">
+      <h1>🌱 SmartFarm</h1>
+      <p>Weather intelligence, crop advice, a planting calendar, disease information, irrigation guidance and market prices, all in one place for your farm.</p>
+      <ul>
+        <li>🌦️ Local 7-day forecast turned into farming recommendations</li>
+        <li>🌾 Crop recommendations based on your soil, season and water</li>
+        <li>📅 Automatic activity calendar and reminders for each crop</li>
+        <li>💰 Compare market prices across towns</li>
+        <li>📊 Track expenses, revenue and harvests</li>
+      </ul>
+    </section>
+    <section class="auth-form">
+      <div class="card">
+        <div class="tabs">
+          <button class="active" data-tab="login">Log in</button>
+          <button data-tab="register">Create account</button>
+        </div>
+        <div id="msg" class="notice hidden"></div>
+
+        <form id="loginForm">
+          <div class="field"><label>Email</label><input type="email" name="email" required autocomplete="email" /></div>
+          <div class="field"><label>Password</label><input type="password" name="password" required autocomplete="current-password" /></div>
+          <button class="btn block" type="submit">Log in</button>
+        </form>
+
+        <form id="registerForm" class="hidden">
+          <div class="field"><label>Full name</label><input name="full_name" required minlength="2" /></div>
+          <div class="field"><label>Email</label><input type="email" name="email" required autocomplete="email" /></div>
+          <div class="field"><label>Phone (optional)</label><input name="phone" placeholder="07xx xxx xxx" /></div>
+          <div class="field"><label>Password</label><input type="password" name="password" required minlength="6" autocomplete="new-password" /></div>
+          <button class="btn block" type="submit">Create account</button>
+          <p class="tiny" style="margin-top:10px">The first account created becomes the administrator.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    if (Auth.token()) window.location.href = "dashboard.html";
+    const msg = $("#msg");
+    $$(".tabs button").forEach((b) => b.addEventListener("click", () => {
+      $$(".tabs button").forEach((x) => x.classList.toggle("active", x === b));
+      $("#loginForm").classList.toggle("hidden", b.dataset.tab !== "login");
+      $("#registerForm").classList.toggle("hidden", b.dataset.tab !== "register");
+      msg.classList.add("hidden");
+    }));
+
+    $("#loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = new FormData(e.target);
+      try {
+        const data = await api("/api/auth/login", { method: "POST", auth: false, form: { username: f.get("email"), password: f.get("password") } });
+        Auth.save(data.access_token, data.user);
+        window.location.href = "dashboard.html";
+      } catch (err) { notice(msg, err.message); }
+    });
+
+    $("#registerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = Object.fromEntries(new FormData(e.target).entries());
+      if (!f.phone) delete f.phone;
+      try {
+        const data = await api("/api/auth/register", { method: "POST", auth: false, body: f });
+        Auth.save(data.access_token, data.user);
+        window.location.href = "farms.html?first=1";
+      } catch (err) { notice(msg, err.message); }
+    });
+  </script>
+</body>
+</html>

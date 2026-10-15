@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartFarm · Farm analytics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="analytics">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="toolbar"><button class="btn secondary sm menu-btn" id="menuBtn">☰</button><h1>Farm analytics</h1></div>
+          <div class="sub">Record what you spend, what you earn and what you harvest. See where the money goes.</div>
+        </div>
+        <div class="toolbar" id="farmPicker"><select id="yearSel" style="width:auto"></select></div>
+      </div>
+
+      <div class="grid cols-4" id="stats"></div>
+
+      <div class="grid cols-2" style="margin-top:18px">
+        <div class="card">
+          <div class="card-head"><h2>Income vs expenses by month</h2></div>
+          <div class="legend"><span style="--c:var(--series-1)">Income</span><span style="--c:var(--series-2)">Expenses</span></div>
+          <div class="chart-box"><canvas id="monthly"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Expenses by category</h2></div>
+          <div class="chart-box"><canvas id="byCat"></canvas></div>
+        </div>
+      </div>
+
+      <div class="grid cols-2" style="margin-top:18px">
+        <div class="card">
+          <div class="card-head"><h2>Harvest by crop (kg)</h2></div>
+          <div class="chart-box"><canvas id="harvestChart"></canvas></div>
+          <div id="harvestTable" style="margin-top:10px"></div>
+        </div>
+        <div class="card">
+          <div class="tabs"><button class="active" data-tab="tx">Record transaction</button><button data-tab="hv">Record harvest</button></div>
+          <div id="msg" class="notice hidden"></div>
+          <form id="txForm">
+            <div class="form-row">
+              <div class="field"><label>Type</label><select name="kind" id="kindSel"><option value="expense">Expense</option><option value="income">Income</option></select></div>
+              <div class="field"><label>Category</label><select name="category" id="catSel"></select></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Amount (KSh)</label><input name="amount" type="number" min="1" step="1" required /></div>
+              <div class="field"><label>Date</label><input name="date" type="date" required /></div>
+            </div>
+            <div class="field"><label>Description</label><input name="description" placeholder="e.g. 2 bags DAP from agrovet" /></div>
+            <button class="btn" type="submit">Save</button>
+          </form>
+          <form id="hvForm" class="hidden">
+            <div class="form-row">
+              <div class="field"><label>Crop</label><select name="crop_key" id="cropSel"></select></div>
+              <div class="field"><label>Quantity (kg)</label><input name="quantity_kg" type="number" min="0.1" step="0.1" required /></div>
+              <div class="field"><label>Date</label><input name="date" type="date" required /></div>
+            </div>
+            <div class="field"><label>Notes</label><input name="notes" placeholder="optional" /></div>
+            <button class="btn" type="submit">Save harvest</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <div class="card-head"><h2>Recent transactions</h2></div>
+        <div id="txList"></div>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>
