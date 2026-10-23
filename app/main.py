@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from .database import engine, Base
 from . import models
-from .routers import auth, weather, crops, market, irrigation, analytics, farms
+from .routers import auth, weather, crops, market, irrigation, analytics, farms, crop_disease, alerts
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -18,6 +18,9 @@ app.include_router(market.router)
 app.include_router(irrigation.router)
 app.include_router(analytics.router)
 app.include_router(farms.router)
+app.include_router(crop_disease.router)
+app.include_router(alerts.router)
+
 
 @app.get("/")
 def read_root():

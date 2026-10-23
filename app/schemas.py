@@ -94,4 +94,32 @@ class MarketPriceResponse(BaseModel):
 
 class MarketPriceBulkCreate(BaseModel):
     prices: List[MarketPriceCreate]
-    
+
+class DiseaseDiagnosisRequest(BaseModel):
+    crop_name: str
+    symptom: str
+
+class DiseaseDiagnosisResponse(BaseModel):
+    crop_name: str
+    symptom: str
+    possible_disease: str
+    symptoms_description: str
+    recommended_action: List[str]
+
+class AlertRequest(BaseModel):
+    farmer_id: int
+    location: str
+    crop_name: str
+    current_temperature_c: float
+    rainfall_forecast_mm: float
+    input_stock_level_kg: float
+    upcoming_activity_days: int
+
+class AlertResponse(BaseModel):
+    farmer_id: int
+    alerts: List[str]
+    notification_priority: str
+    generated_at: datetime = datetime.now()
+
+    class Config:
+        from_attributes = True
