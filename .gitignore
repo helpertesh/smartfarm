@@ -1,0 +1,15 @@
+# Virtual Environment
+venv/
+.venv/
+ENV/
+
+# Environment variables
+.env
+
+# Local SQLite database
+agrihub.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
