@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Virtual Environment
 venv/
 .venv/
@@ -13,3 +14,29 @@ agrihub.db
 __pycache__/
 *.py[cod]
 *$py.class
+=======
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Env / secrets
+.env
+backend/.env
+
+# Database
+*.db
+*.sqlite3
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+>>>>>>> 107a357e01283d9e7d9dcb969072b01435d7c555

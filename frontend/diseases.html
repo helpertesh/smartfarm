@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartFarm · Crop health</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="diseases">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="toolbar"><button class="btn secondary sm menu-btn" id="menuBtn">☰</button><h1>Crop health</h1></div>
+          <div class="sub">Select the crop and what you see in the field to get likely causes and what to do.</div>
+        </div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h2>What is the problem?</h2>
+          <form id="dxForm">
+            <div class="field"><label>Crop</label><select name="crop_key" id="cropSel"></select></div>
+            <div class="field"><label>Symptoms (pick all that apply)</label><div class="checks" id="symptoms"></div></div>
+            <button class="btn block" type="submit">Diagnose</button>
+          </form>
+        </div>
+        <div class="card span-2">
+          <div class="card-head"><h2>Possible causes</h2><span class="tiny" id="ctx"></span></div>
+          <div id="results"><div class="empty">Choose a crop and at least one symptom.</div></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <div class="card-head"><h2>Disease &amp; pest library</h2><select id="libFilter" style="width:auto"><option value="">All crops</option></select></div>
+        <div id="library" class="grid cols-3"></div>
+      </div>
+    </main>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/diseases.js"></script>
+</body>
+</html>

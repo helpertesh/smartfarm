@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartFarm · Crop calendar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="calendar">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="toolbar"><button class="btn secondary sm menu-btn" id="menuBtn">☰</button><h1>Crop calendar</h1></div>
+          <div class="sub">Pick a crop and planting date; we generate every activity from planting to harvest.</div>
+        </div>
+        <div class="toolbar" id="farmPicker"></div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h2>New crop plan</h2>
+          <div id="formMsg" class="notice hidden"></div>
+          <form id="planForm">
+            <div class="field"><label>Crop</label><select name="crop_key" id="cropSel"></select></div>
+            <div class="field"><label>Planting date</label><input name="planting_date" type="date" required /></div>
+            <div class="field"><label>Area (acres)</label><input name="area_acres" type="number" step="0.1" min="0.1" value="1" required /></div>
+            <button class="btn block" type="submit">Create plan</button>
+          </form>
+          <h3 style="margin-top:18px">Preview</h3>
+          <div id="preview" class="small muted">Select a crop and date to preview the schedule.</div>
+        </div>
+
+        <div class="card span-2">
+          <div class="card-head"><h2>Your crop plans</h2></div>
+          <div id="plans"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/calendar.js"></script>
+</body>
+</html>
