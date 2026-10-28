@@ -24,3 +24,4 @@ class Farm(Base):
     crop_plans = relationship("CropPlan", back_populates="farm", cascade="all, delete-orphan")
     transactions = relationship("Transaction", back_populates="farm", cascade="all, delete-orphan")
     harvests = relationship("Harvest", back_populates="farm", cascade="all, delete-orphan")
+    inputs = relationship("InputStock", back_populates="farm", cascade="all, delete-orphan")

@@ -179,3 +179,34 @@ class HarvestOut(BaseModel):
     quantity_kg: float
     date: dt.date
     notes: str | None
+
+
+# ---------- Farm inputs / stock ----------
+class InputStockCreate(BaseModel):
+    farm_id: int
+    name: str = Field(min_length=2, max_length=120)
+    category: str
+    quantity: float = Field(ge=0)
+    unit: str = "kg"
+    reorder_level: float = Field(ge=0, default=10)
+
+
+class InputStockUpdate(BaseModel):
+    name: str | None = Field(default=None, min_length=2, max_length=120)
+    category: str | None = None
+    quantity: float | None = Field(default=None, ge=0)
+    unit: str | None = None
+    reorder_level: float | None = Field(default=None, ge=0)
+
+
+class InputStockOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    farm_id: int
+    name: str
+    category: str
+    quantity: float
+    unit: str
+    reorder_level: float
+    low: bool = False
+    updated_at: dt.datetime | None = None

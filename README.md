@@ -13,7 +13,8 @@ A web platform that helps smallholder farmers make better decisions using weathe
 | 💧 Irrigation | Crop-stage water demand (crop coefficient × reference evapotranspiration) combined with recent and forecast rain and optional soil moisture. |
 | 💰 Market prices | Latest prices per market, cross-market comparison and 90-day price trend. Admins maintain prices. |
 | 📊 Farm analytics | Record income, expenses and harvests; revenue/expense/profit, monthly chart, expenses by category, harvest by crop with estimated value. |
-| 🚨 Alerts | Weather, overdue/upcoming activities, harvest dates and disease-risk alerts per farm. |
+| 📦 Farm inputs | Track seed, fertilizer, chemicals and feed in store; use/restock in one click; low-stock and out-of-stock alerts. |
+| 🚨 Alerts | Weather, overdue/upcoming activities, harvest dates, disease-risk and low-stock alerts per farm. |
 | 🛠️ Admin panel | Platform stats, user roles, market price updates. |
 
 ## Tech stack
@@ -31,9 +32,9 @@ backend/
     main.py            FastAPI app, CORS, static frontend serving
     core/              settings, JWT + password security
     db/session.py      engine, session, Base
-    models/            User, Farm, CropPlan, FarmActivity, Transaction, Harvest, MarketPrice
+    models/            User, Farm, CropPlan, FarmActivity, Transaction, Harvest, InputStock, MarketPrice
     schemas/           Pydantic request/response models
-    routers/           auth, farms, weather, advisory, calendar, diseases, irrigation, market, analytics, alerts, admin
+    routers/           auth, farms, weather, advisory, calendar, diseases, irrigation, market, analytics, inputs, alerts, admin
     services/          weather, advisory rules, calendar generator, irrigation, alerts
     data/              crop knowledge base, disease knowledge base, market seed prices
     seed.py            seeds market prices on first start

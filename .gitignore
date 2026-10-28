@@ -1,25 +1,10 @@
-<<<<<<< HEAD
-# Virtual Environment
-venv/
-.venv/
-ENV/
-
-# Environment variables
-.env
-
-# Local SQLite database
-agrihub.db
-
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-=======
-# Python
-__pycache__/
-*.pyc
 .venv/
 venv/
+ENV/
 *.egg-info/
 .pytest_cache/
 
@@ -39,4 +24,3 @@ Thumbs.db
 
 # Node
 node_modules/
->>>>>>> 107a357e01283d9e7d9dcb969072b01435d7c555

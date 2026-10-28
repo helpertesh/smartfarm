@@ -8,6 +8,7 @@ const NAV = [
   { page: "diseases", href: "diseases.html", icon: "🦠", label: "Crop health" },
   { page: "market", href: "market.html", icon: "💰", label: "Market prices" },
   { page: "analytics", href: "analytics.html", icon: "📊", label: "Farm analytics" },
+  { page: "inputs", href: "inputs.html", icon: "📦", label: "Farm inputs" },
   { page: "admin", href: "admin.html", icon: "🛠️", label: "Admin panel", admin: true },
 ];
 

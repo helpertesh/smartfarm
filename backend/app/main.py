@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.core.config import get_settings
 from app.db.session import Base, engine
-from app.routers import admin, advisory, alerts, analytics, auth, calendar, diseases, farms, irrigation, market, weather
+from app.routers import admin, advisory, alerts, analytics, auth, calendar, diseases, farms, inputs, irrigation, market, weather
 from app.seed import seed_market_prices
 
 settings = get_settings()
@@ -39,7 +39,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for r in (auth, farms, weather, advisory, calendar, diseases, irrigation, market, analytics, alerts, admin):
+for r in (auth, farms, weather, advisory, calendar, diseases, irrigation, market, analytics, inputs, alerts, admin):
     app.include_router(r.router)
 
 

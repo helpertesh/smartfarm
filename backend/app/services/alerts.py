@@ -1,4 +1,4 @@
-"""Builds the farmer's alert feed from weather, calendar and crop status."""
+"""Builds the farmer's alert feed from weather, calendar, crop status and input stock."""
 
 from datetime import date, timedelta
 
@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.data.crops import CROPS
 from app.models.crop_plan import CropPlan, FarmActivity
 from app.models.farm import Farm
+from app.models.inputs import InputStock
 from app.services.weather import weather_recommendations
 
 
@@ -79,6 +80,24 @@ def build_alerts(db: Session, farm: Farm, weather: dict | None, today: date | No
                         "date": today.isoformat(),
                     }
                 )
+
+    # Low stock of farm inputs
+    low_items = db.query(InputStock).filter(InputStock.farm_id == farm.id, InputStock.quantity <= InputStock.reorder_level).all()
+    for item in low_items:
+        qty = f"{item.quantity:g} {item.unit}"
+        alerts.append(
+            {
+                "type": "stock",
+                "level": "danger" if item.quantity == 0 else "warning",
+                "title": f"{'Out of' if item.quantity == 0 else 'Low on'} {item.name}",
+                "message": (
+                    "None left in store. Restock before it holds up planting or spraying."
+                    if item.quantity == 0
+                    else f"Only {qty} left (alert level {item.reorder_level:g} {item.unit}). Restock soon to avoid delays."
+                ),
+                "date": today.isoformat(),
+            }
+        )
 
     order = {"danger": 0, "warning": 1, "info": 2, "success": 3}
     alerts.sort(key=lambda a: (order.get(a["level"], 9), a["date"]))
